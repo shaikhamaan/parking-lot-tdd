@@ -1,15 +1,19 @@
 package models
 
 import Constants.SPOTS
+import Factory
+import exceptions.OverflowException
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import repositories.ParkingLot
 
 class ParkingLotTest {
     @AfterEach
     fun tearDown() {
         ParkingLot.reset()
+        Factory.reset()
     }
 
     @Test

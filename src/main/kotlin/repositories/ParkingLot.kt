@@ -1,6 +1,9 @@
-package models
+package repositories
 
 import Constants.SPOTS
+import exceptions.OverflowException
+import exceptions.UnderflowException
+import models.Vehicle
 
 
 object ParkingLot {
@@ -25,6 +28,7 @@ object ParkingLot {
 
     fun reset() {
         availableSpots = SPOTS
+        parkingList.clear()
     }
 
     fun increaseAvailableSpotsByOne(): Int {
@@ -45,5 +49,13 @@ object ParkingLot {
 
     fun getParkingList(): MutableMap<Int, Vehicle> {
         return parkingList
+    }
+
+    fun isVehicleParked(id: Int): Boolean {
+        return parkingList.containsKey(id)
+    }
+
+    fun removeFromParkingList(vehicle: Vehicle) {
+        parkingList.remove(vehicle.id)
     }
 }
