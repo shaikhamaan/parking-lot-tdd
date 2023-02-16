@@ -4,6 +4,7 @@ import Constants.SPOTS
 
 
 object ParkingLot {
+    private val parkingList: MutableMap<Int, Vehicle> = mutableMapOf()
     private var availableSpots: Int = SPOTS
 
     fun getAvailableSpots(): Int {
@@ -32,5 +33,17 @@ object ParkingLot {
         }
         setAvailableSpots(availableSpots + 1)
         return availableSpots
+    }
+
+    fun addToParkingList(vehicle: Vehicle) {
+        parkingList[vehicle.id] = vehicle
+    }
+
+    fun isSpotAvailable(): Boolean {
+        return getAvailableSpots() == 0
+    }
+
+    fun getParkingList(): MutableMap<Int, Vehicle> {
+        return parkingList
     }
 }
