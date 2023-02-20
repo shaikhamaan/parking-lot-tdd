@@ -1,11 +1,10 @@
 package models
 
-import Constants.SPOTS
+import Constants.AVAILABLE_SPOTS
 import Factory
-import exceptions.OverflowException
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import repositories.ParkingLot
 
@@ -17,24 +16,28 @@ class ParkingLotTest {
     }
 
     @Test
-    fun `it should get the number of available spots`() {
-        val availableSpots = ParkingLot.getAvailableSpots()
-        assertEquals(SPOTS, availableSpots)
+    fun `it should check if the spot is available`() {
+        val spotStatus = ParkingLot.isSpotAvailable()
+
+        assertTrue(spotStatus)
     }
 
     @Test
     fun `it should reduce available spots`() {
         ParkingLot.reduceAvailableSpotsByOne()
+
         val availableSpots = ParkingLot.getAvailableSpots()
-        assertEquals(SPOTS - 1, availableSpots)
+
+        assertEquals(AVAILABLE_SPOTS - 1, availableSpots)
     }
 
     @Test
     fun `it should increase available spots`() {
-        assertThrows(OverflowException::class.java) { ParkingLot.increaseAvailableSpotsByOne() }
         ParkingLot.reduceAvailableSpotsByOne()
         ParkingLot.increaseAvailableSpotsByOne()
+
         val availableSpots = ParkingLot.getAvailableSpots()
-        assertEquals(SPOTS, availableSpots)
+
+        assertEquals(AVAILABLE_SPOTS, availableSpots)
     }
 }

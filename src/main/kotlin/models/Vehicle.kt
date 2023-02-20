@@ -10,7 +10,7 @@ data class Vehicle(
     var id: Int
 ) {
     fun park(): Ticket {
-        if (ParkingLot.isSpotAvailable()) {
+        if (!ParkingLot.isSpotAvailable()) {
             throw NoSpotAvailableException("No spot available to park")
         }
 
